@@ -1,6 +1,7 @@
 #!/bin/sh
 
-BUILDROOT=buildroot-2019.11.1
+OUTPUT_DIRECTORY="output"
+BUILDROOT=buildroot-2024.08.1
 # Supported targets: cmhybrid (supports cm1 cm3), cm4
 TARGET=cm4
 
@@ -30,19 +31,17 @@ make -C $BUILDROOT
 #
 
 # initramfs file build by buildroot containing the root file system
-cp $BUILDROOT/output/images/rootfs.cpio.xz output/scriptexecute.img
+cp $BUILDROOT/output/images/rootfs.cpio.xz "${OUTPUT_DIRECTORY}/scriptexecute.img"
 # Linux kernel
-cp $BUILDROOT/output/images/zImage output/kernel.img
+cp $BUILDROOT/output/images/zImage "${OUTPUT_DIRECTORY}/kernel.img"
 # Raspberry Pi firmware files
-cp $BUILDROOT/output/images/rpi-firmware/*.elf output
-cp $BUILDROOT/output/images/rpi-firmware/*.dat output
-cp $BUILDROOT/output/images/rpi-firmware/bootcode.bin output
-cp $BUILDROOT/output/images/*.dtb output
+cp $BUILDROOT/output/images/rpi-firmware/* "${OUTPUT_DIRECTORY}"
+cp $BUILDROOT/output/images/*.dtb "${OUTPUT_DIRECTORY}"
 
 # Uncomment if using dwc2
-mkdir -p output/overlays
-mv output/dwc2-overlay.dtb output/overlays/dwc2.dtbo
-mv output/spi-gpio40-45-overlay.dtb output/overlays/spi-gpio40-45.dtbo
+mkdir -p "${OUTPUT_DIRECTORY}/overlays"
+mv "${OUTPUT_DIRECTORY}/dwc2-overlay.dtb" "${OUTPUT_DIRECTORY}/overlays/dwc2.dtbo"
+mv "${OUTPUT_DIRECTORY}/spi-gpio40-45-overlay.dtb" "${OUTPUT_DIRECTORY}/overlays/spi-gpio40-45.dtbo"
 
 echo
 echo Build complete. Files are in output folder.
