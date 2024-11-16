@@ -1,0 +1,5 @@
+config BR2_PACKAGE_RPI_PINCTRL
+	bool "rpi-pinctrl"
+	depends on BR2_PACKAGE_LIBGPIOD2
+	help
+	  Raspberry Pi pinctrl binary
