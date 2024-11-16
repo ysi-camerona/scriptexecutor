@@ -126,8 +126,7 @@ case "$1" in
                         JUMPER=""
                         for GPIO in 5 13 21
                         do
-                            echo "$GPIO" >/sys/class/gpio/export
-                            GPIOVALUE=`cat /sys/class/gpio/gpio$GPIO/value`
+                            GPIOVALUE=`pinctrl lev $GPIO`
                             JUMPER="$JUMPER$GPIOVALUE"
                         done
                 fi
