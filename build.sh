@@ -24,7 +24,7 @@ fi
 # Build everything
 #
 CPU_COUNT=$(nproc)
-FORCE_UNSAFE_CONFIGURE=1 make -C $BUILDROOT "-j${CPU_COUNT}"
+make -C $BUILDROOT "-j${CPU_COUNT}"
 
 #
 # Copy the files we are interested in from buildroot's "output/images" directory
